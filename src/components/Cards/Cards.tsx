@@ -26,25 +26,46 @@ const Cards = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.get<ApiResponse>("https://randomuser.me/api/?results=10");
-        setUsers(response.data.results);
-      } catch (err) {
-        if (axios.isAxiosError(err)) {
-          setError(err.message || "Failed to fetch users");
-        } else {
-          setError("An unknown error occurred");
-        }
-      } finally {
-        setLoading(false);
+  const loadUsers = async () => {
+    try {
+      const response = await axios.get<ApiResponse>("https://randomuser.me/api/?results=10");
+      setUsers(response.data.results);
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        setError(err.message || "Failed to fetch users");
+      } else {
+        setError("An unknown error occurred");
       }
-    };
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchUsers();
+  const updateRandomUsers = async () => {
+    const randomCount = Math.floor(Math.random() * 10) + 1;
+    const promises = [];
 
-    const interval = setInterval(fetchUsers, 10000);
+    for (let i = 0; i < randomCount; i++) {
+      promises.push(
+        axios.get<ApiResponse>("https://randomuser.me/api/?results=1")
+          .then(response => {
+            const newUser = response.data.results[0];
+            setUsers(prevUsers => {
+              const updatedUsers = [...prevUsers];
+              const userIndex = Math.floor(Math.random() * prevUsers.length);
+              updatedUsers[userIndex] = newUser;
+              return updatedUsers;
+            });
+          })
+      );
+    }
+
+    await Promise.all(promises);
+  };
+
+  useEffect(() => {
+    loadUsers();
+    const interval = setInterval(updateRandomUsers, 3000);
     return () => clearInterval(interval);
   }, []);
 
@@ -72,4 +93,5 @@ const Cards = () => {
     </div>
   );
 };
+
 export default Cards;
