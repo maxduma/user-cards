@@ -22,6 +22,20 @@
   cursor: pointer;
   min-width: 200px;
 
+  h3, p {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin: 0;
+  }
+  h3 {
+    margin-bottom: 8px;
+  }
+  p {
+    display: block;
+    max-height: 40px;
+  }
+
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
