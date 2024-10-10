@@ -3,7 +3,8 @@
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(4, 1fr);
   transition: all 0.5s ease;
-  grid-gap: 4px;
+  grid-gap: 10px;
+  padding: 10px;
 }
 .title {
   text-align: center;
@@ -19,6 +20,7 @@
   transition: transform 0.2s;
   position: relative;
   cursor: pointer;
+  min-width: 200px;
 
   &:hover {
     transform: translateY(-5px);
