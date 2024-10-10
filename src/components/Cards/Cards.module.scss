@@ -1,0 +1,63 @@
+.cardsContainer {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  transition: all 0.5s ease;
+  grid-gap: 4px;
+}
+.title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  transition: transform 0.2s;
+  position: relative;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  img {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+  }
+}
+
+.card1 { grid-area: 1 / 1 / 5 / 5; }
+.card2 { grid-area: 1 / 5 / 3 / 7; }
+.card3 { grid-area: 1 / 7 / 3 / 9; }
+.card4 { grid-area: 3 / 5 / 4 / 6; }
+.card5 { grid-area: 3 / 6 / 4 / 7; }
+.card6 { grid-area: 3 / 7 / 4 / 8; }
+.card7 { grid-area: 3 / 8 / 4 / 9; }
+.card8 { grid-area: 4 / 5 / 5 / 6; }
+.card9 { grid-area: 4 / 6 / 5 / 7; }
+.card10 { grid-area: 4 / 7 / 5 / 9; }
+
+@media (max-width: 959px) {
+  .cardsContainer {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    grid-gap: 10px;
+  }
+
+  .card1 { grid-area: 1 / 1 / 5 / 5; }
+  .card2 { grid-area: 5 / 1 / 7 / 3; }
+  .card3 { grid-area: 5 / 3 / 7 / 5; }
+  .card4 { grid-area: 7 / 1 / 9 / 2; }
+  .card5 { grid-area: 7 / 2 / 9 / 3; }
+  .card6 { grid-area: 7 / 3 / 9 / 4; }
+  .card7 { grid-area: 7 / 4 / 9 / 5; }
+  .card8 { grid-area: 9 / 1 / 10 / 2; }
+  .card9 { grid-area: 9 / 2 / 10 / 3; }
+  .card10 { grid-area: 9 / 3 / 10 / 5; }
+}
